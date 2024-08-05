@@ -48,7 +48,7 @@
   # become_user: kafka
   # become_method: su
   ansible.builtin.unarchive:
-    src: /home/kafka/kafka.tgz
+    remote_src: /home/kafka/kafka.tgz
     dest: /home/kafka/
 
 - name: Remove archive
