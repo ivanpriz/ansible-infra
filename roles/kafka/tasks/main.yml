@@ -13,48 +13,48 @@
     mode: 0440
 
 - name: Update apt
-  become: true
-  become_user: kafka
-  become_method: su
+  # become: true
+  # become_user: kafka
+  # become_method: su
   apt:
     upgrade: yes
     update_cache: yes
 
 - name: Add open JDK repo
-  become: true
-  become_user: kafka
-  become_method: su
+  # become: true
+  # become_user: kafka
+  # become_method: su
   apt_repository:
     repo: ppa:openjdk-r/ppa
 
 - name: Install java
-  become: true
-  become_user: kafka
-  become_method: su
+  # become: true
+  # become_user: kafka
+  # become_method: su
   apt:
     name: "openjdk-11-jdk"
     update_cache: yes
 
 - name: Download kafka3.4 tar
-  become: true
-  become_user: kafka
-  become_method: su
+  # become: true
+  # become_user: kafka
+  # become_method: su
   ansible.builtin.get_url:
     url: https://archive.apache.org/dist/kafka/3.4.0/kafka_2.12-3.4.0.tgz 
     dest: /home/kafka/kafka.tgz
 
 - name: Unarchive kafka
-  become: true
-  become_user: kafka
-  become_method: su
+  # become: true
+  # become_user: kafka
+  # become_method: su
   ansible.builtin.unarchive:
     src: /home/kafka/kafka.tgz
     dest: /home/kafka/
 
 - name: Remove archive
-  become: true
-  become_user: kafka
-  become_method: su
+  # become: true
+  # become_user: kafka
+  # become_method: su
   ansible.builtin.file:
     path: /home/kafka/kafka.tgz
     state: absent
