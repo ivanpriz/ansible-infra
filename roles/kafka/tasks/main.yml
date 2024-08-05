@@ -13,7 +13,7 @@
     mode: 0440
 
 - name: Update apt
-  # become: true
+  become: true
   # become_user: kafka
   # become_method: su
   apt:
@@ -21,14 +21,14 @@
     update_cache: yes
 
 - name: Add open JDK repo
-  # become: true
+  become: true
   # become_user: kafka
   # become_method: su
   apt_repository:
     repo: ppa:openjdk-r/ppa
 
 - name: Install java
-  # become: true
+  become: true
   # become_user: kafka
   # become_method: su
   apt:
