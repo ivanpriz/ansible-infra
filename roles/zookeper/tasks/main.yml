@@ -1,4 +1,5 @@
 - name: Create unit file for Zookeper
+  become: true
   template:
     src: zookeper.service.j2
     dest: /lib/systemd/system/zookeper.service

@@ -36,7 +36,7 @@
     update_cache: yes
 
 - name: Download kafka3.4 tar
-  # become: true
+  become: true
   # become_user: kafka
   # become_method: su
   ansible.builtin.get_url:
@@ -44,7 +44,7 @@
     dest: /home/kafka/kafka.tgz
 
 - name: Unarchive kafka
-  # become: true
+  become: true
   # become_user: kafka
   # become_method: su
   ansible.builtin.unarchive:
@@ -52,7 +52,7 @@
     dest: /home/kafka/
 
 - name: Remove archive
-  # become: true
+  become: true
   # become_user: kafka
   # become_method: su
   ansible.builtin.file:
