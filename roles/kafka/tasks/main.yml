@@ -1,16 +1,16 @@
-- name: Create kafka user
-  become: true
-  ansible.builtin.user:
-    name: kafka
-    groups: sudo
-    append: true
+# - name: Create kafka user
+#   become: true
+#   ansible.builtin.user:
+#     name: kafka
+#     groups: sudo
+#     append: true
 
-- name: Make kafka user sudo without pwd
-  become: true
-  copy:
-    dest: /etc/sudoers.d/80-ansible-sudo-user
-    content: "kafka ALL=(ALL) NOPASSWD:ALL"
-    mode: 0440
+# - name: Make kafka user sudo without pwd
+#   become: true
+#   copy:
+#     dest: /etc/sudoers.d/80-ansible-sudo-user
+#     content: "kafka ALL=(ALL) NOPASSWD:ALL"
+#     mode: 0440
 
 - name: Update apt
   become: true
@@ -41,7 +41,7 @@
   # become_method: su
   ansible.builtin.get_url:
     url: https://archive.apache.org/dist/kafka/3.4.0/kafka_2.12-3.4.0.tgz 
-    dest: /home/kafka/kafka.tgz
+    dest: /tmp/kafka.tgz
 
 - name: Unarchive kafka
   become: true
@@ -49,13 +49,13 @@
   # become_method: su
   ansible.builtin.unarchive:
     remote_src: true
-    src: /home/kafka/kafka.tgz
-    dest: /home/kafka/
+    src: /tmp/kafka.tgz
+    dest: /etc/
 
 - name: Remove archive
   become: true
   # become_user: kafka
   # become_method: su
   ansible.builtin.file:
-    path: /home/kafka/kafka.tgz
+    path: /tmp/kafka.tgz
     state: absent
