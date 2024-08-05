@@ -2,5 +2,5 @@
   become: true
   template:
     src: zookeper.service.j2
-    dest: /lib/systemd/system/zookeper.service
+    dest: /etc/systemd/system/zookeper.service
   notify: Start Zookeper
