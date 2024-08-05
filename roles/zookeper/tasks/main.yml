@@ -1,0 +1,5 @@
+- name: Create unit file for Zookeper
+  template:
+    src: zookeper.service.j2
+    dest: /lib/systemd/system/zookeper.service
+  notify: Start Zookeper

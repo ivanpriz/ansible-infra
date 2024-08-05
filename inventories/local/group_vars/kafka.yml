@@ -1,0 +1,3 @@
+zookeper_pwd: "{{ vault_zookeper_pwd }}"
+broker_pwd: "{{ vault_broker_pwd }}"
+local_ssh_pwd: "{{ vault_local_ssh_pwd }}"

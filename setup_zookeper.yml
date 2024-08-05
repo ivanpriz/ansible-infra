@@ -1,0 +1,7 @@
+- name: Setup Zookeper
+  hosts: zookeper_local
+  vars_files:
+    - inventories/local/group_vars/kafka.yml
+    - inventories/local/group_vars/vault.yml
+  roles:
+    - zookeper
