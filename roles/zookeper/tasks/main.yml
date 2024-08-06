@@ -4,15 +4,15 @@
     src: zookeper.service.j2
     dest: /etc/systemd/system/zookeper.service
 
-- name: Chmod for Zookeper script
-  become: true
-  ansible.builtin.file:
-    name: "{{ item.file }}"  
-    mode: "{{ item.mod }}"
-  loop:
-    - { file: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/bin/zookeeper-server-start.sh", mod: '744'}
-    - { file: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/bin/zookeeper-server-stop.sh", mod: '744' }
-    - { file: '/etc/systemd/system/zookeper.service', mod: '644'}
+# - name: Chmod for Zookeper script
+#   become: true
+#   ansible.builtin.file:
+#     name: "{{ item.file }}"  
+#     mode: "{{ item.mod }}"
+#   loop:
+#     - { file: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/bin/zookeeper-server-start.sh", mod: '744'}
+#     - { file: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/bin/zookeeper-server-stop.sh", mod: '744' }
+#     - { file: '/etc/systemd/system/zookeper.service', mod: '644'}
 
 - name: Just force systemd to reread configs (2.4 and above)
   become: true
