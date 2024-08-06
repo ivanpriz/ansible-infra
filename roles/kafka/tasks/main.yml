@@ -52,6 +52,13 @@
     - not kafka_archive_dir.stat.exists
     - not kafka_dir.stat.exists
 
+- name: Check if kafka archive exists again
+  become: true
+  stat:
+    path: "{{ kafka_download_path }}"
+  register:
+    kafka_archive_dir
+
 - name: Unarchive kafka
   become: true
   ansible.builtin.unarchive:
