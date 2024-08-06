@@ -1,4 +1,4 @@
-- name: Start Zookeper
+- name: Retart Zookeper
   become: true
   ansible.builtin.service:
     name: zookeper

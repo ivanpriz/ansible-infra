@@ -1,61 +1,65 @@
-# - name: Create kafka user
-#   become: true
-#   ansible.builtin.user:
-#     name: kafka
-#     groups: sudo
-#     append: true
+- name: Create kafka user
+  become: true
+  ansible.builtin.user:
+    name: "{{ kafka_user }}"
+    groups: sudo
+    append: true
 
-# - name: Make kafka user sudo without pwd
-#   become: true
-#   copy:
-#     dest: /etc/sudoers.d/80-ansible-sudo-user
-#     content: "kafka ALL=(ALL) NOPASSWD:ALL"
-#     mode: 0440
+- name: Make kafka user sudo without pwd
+  become: true
+  copy:
+    dest: /etc/sudoers.d/80-ansible-sudo-user
+    content: "{{ kafka_user }} ALL=(ALL) NOPASSWD:ALL"
+    mode: 0440
 
 - name: Update apt
   become: true
-  # become_user: kafka
-  # become_method: su
   apt:
     upgrade: yes
     update_cache: yes
 
 - name: Add open JDK repo
   become: true
-  # become_user: kafka
-  # become_method: su
   apt_repository:
     repo: ppa:openjdk-r/ppa
 
 - name: Install java
   become: true
-  # become_user: kafka
-  # become_method: su
   apt:
     name: "openjdk-11-jdk"
     update_cache: yes
 
+- name: Check if kafka archive exists
+  stat:
+    path: "{{ kafka_download_path }}"
+  register:
+    kafka_archive_dir
+
 - name: Download kafka3.4 tar
   become: true
-  # become_user: kafka
-  # become_method: su
   ansible.builtin.get_url:
     url: https://archive.apache.org/dist/kafka/3.4.0/kafka_2.12-3.4.0.tgz 
-    dest: /home/ivan/kafka.tgz
+    dest: "{{ kafka_download_path }}"
+  when:
+    not kafka_archive_dir.stat.exists
+
+- name: Check if unarchived kafka exists
+  stat:
+    path: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0"
+  register:
+    kafka_dir
 
 - name: Unarchive kafka
   become: true
-  # become_user: kafka
-  # become_method: su
   ansible.builtin.unarchive:
     remote_src: true
-    src: /home/ivan/kafka.tgz
-    dest: /home/ivan/
+    src: "{{ kafka_download_path }}"
+    dest: "{{ kafka_unzip_path }}"
+  when:
+    not kafka_dir.stat.exists
 
 - name: Remove archive
   become: true
-  # become_user: kafka
-  # become_method: su
   ansible.builtin.file:
-    path: /home/ivan/kafka.tgz
+    path: "{{ kafka_download_path }}"
     state: absent
