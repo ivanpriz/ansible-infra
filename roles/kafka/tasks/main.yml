@@ -61,7 +61,7 @@
   when:
     - not kafka_dir.stat.exists
     - kafka_archive_dir.stat.exists
-
+    
 - name: Remove archive
   become: true
   ansible.builtin.file:
