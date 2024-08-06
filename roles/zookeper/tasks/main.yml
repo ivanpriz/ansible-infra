@@ -25,4 +25,4 @@
   ansible.builtin.service:
     name: zookeper
     enabled: true
-    state: restarted | started
+    state: restarted
