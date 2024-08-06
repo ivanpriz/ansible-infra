@@ -1,5 +1,5 @@
 zookeper_pwd: "{{ vault_zookeper_pwd }}"
 broker_pwd: "{{ vault_broker_pwd }}"
-kafka_unzip_path: '/var/lib'
+kafka_unzip_path: '/home/kafka/'
 kafka_download_path: '/tmp/kafka.tgz'
 kafka_user: 'kafka'
