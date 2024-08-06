@@ -19,3 +19,10 @@
   ansible.builtin.service:
     daemon_reload: true
   notify: "Restart Zookeper"
+
+- name: "Restart Zookeper"
+  become: true
+  ansible.builtin.service:
+    name: zookeper
+    enabled: true
+    state: restarted | started
