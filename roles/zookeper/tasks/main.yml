@@ -3,4 +3,14 @@
   template:
     src: zookeper.service.j2
     dest: /etc/systemd/system/zookeper.service
+
+- name: Chmod for Zookeper script
+  become: true
+  ansible.builtin.file:
+    name: "{{ item.file }}"  
+    mode: "{{ item.mod }}"
+  loop:
+    - { file: '/home/ivan/kafka_2.12-3.4.0/bin/zookeeper-server-start.sh', mod: '744'}
+    - { file: '/home/ivan/kafka_2.12-3.4.0/bin/zookeeper-server-stop.sh', mod: '744' }
+    - { file: '/etc/systemd/system/zookeper.service', mod: '644'}
   notify: Start Zookeper
