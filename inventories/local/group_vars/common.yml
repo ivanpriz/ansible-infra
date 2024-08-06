@@ -1,0 +1,2 @@
+ssh_pwd: "{{ vault_local_ssh_pwd }}"
+ssh_user: "{{ vault_local_ssh_user }}"

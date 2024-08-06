@@ -3,5 +3,6 @@
   vars_files:
     - inventories/local/group_vars/kafka.yml
     - inventories/local/group_vars/vault.yml
+    - inventories/local/group_vars/common.yml
   roles:
     - zookeper
