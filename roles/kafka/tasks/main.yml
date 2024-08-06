@@ -30,12 +30,14 @@
     update_cache: yes
 
 - name: Check if kafka archive exists
+  become: true
   stat:
     path: "{{ kafka_download_path }}"
   register:
     kafka_archive_dir
 
 - name: Check if unarchived kafka exists
+  become: true
   stat:
     path: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0"
   register:
