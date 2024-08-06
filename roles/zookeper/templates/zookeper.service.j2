@@ -5,9 +5,9 @@ After=network.target
 
 [Service]
 Type=simple
-User="{{ kafka_user }}"
-ExecStart="{{ kafka_unzip_path }}/kafka_2.12-3.4.0/bin/zookeeper-server-start.sh {{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/zookeeper.properties"        
-ExecStop="{{ kafka_unzip_path }}/kafka_2.12-3.4.0/bin/zookeeper-server-stop.sh"
+User={{ kafka_user }}
+ExecStart={{ kafka_unzip_path }}/kafka_2.12-3.4.0/bin/zookeeper-server-start.sh {{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/zookeeper.properties
+ExecStop={{ kafka_unzip_path }}/kafka_2.12-3.4.0/bin/zookeeper-server-stop.sh
 Restart=on-abnormal
 
 [Install]
