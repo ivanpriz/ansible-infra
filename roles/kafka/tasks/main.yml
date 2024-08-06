@@ -35,19 +35,20 @@
   register:
     kafka_archive_dir
 
+- name: Check if unarchived kafka exists
+  stat:
+    path: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0"
+  register:
+    kafka_dir
+
 - name: Download kafka3.4 tar
   become: true
   ansible.builtin.get_url:
     url: https://archive.apache.org/dist/kafka/3.4.0/kafka_2.12-3.4.0.tgz 
     dest: "{{ kafka_download_path }}"
   when:
-    not kafka_archive_dir.stat.exists
-
-- name: Check if unarchived kafka exists
-  stat:
-    path: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0"
-  register:
-    kafka_dir
+    - not kafka_archive_dir.stat.exists
+    - not kafka_dir.stat.exists
 
 - name: Unarchive kafka
   become: true
@@ -56,7 +57,8 @@
     src: "{{ kafka_download_path }}"
     dest: "{{ kafka_unzip_path }}"
   when:
-    not kafka_dir.stat.exists
+    - not kafka_dir.stat.exists
+    - kafka_archive_dir.stat.exists
 
 - name: Remove archive
   become: true
