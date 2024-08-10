@@ -1,0 +1,1 @@
+broker_pwd: "{{ vault_broker_pwd }}"

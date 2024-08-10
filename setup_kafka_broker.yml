@@ -1,0 +1,7 @@
+- name: Setup Kafka Broker
+  hosts: kafka_brokers
+  vars_files:
+    - inventories/local/group_vars/vault.yml
+    - inventories/local/group_vars/common.yml
+  roles:
+    - kafka_broker
