@@ -2,6 +2,6 @@ broker.id=1
 listeners=PLAINTEXT://0.0.0.0:9092
 advertised.listeners=PLAINTEXT://{{ groups['zookeeper'][0] }}:9092
 log.dirs=/opt/kafka/data/kafka-logs
-.connect={% for zoo_node in groups['zookeeper'] %}{{hostvars[zoo_node]['ansible_host']}}:2181{% if not loop.last %},{% endif %}{% endfor %}
+zookeeper.connect={% for zoo_node in groups['zookeeper'] %}{{hostvars[zoo_node]['ansible_host']}}:2181{% if not loop.last %},{% endif %}{% endfor %}
 
 zookeeper.connection.timeout.ms=18000
