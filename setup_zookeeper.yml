@@ -1,5 +1,5 @@
-- name: Setup Zookeper
-  hosts: zookepeer
+- name: Setup Zookeeper
+  hosts: zookeeper
   vars_files:
     - inventories/local/group_vars/vault.yml
     - inventories/local/group_vars/common.yml
