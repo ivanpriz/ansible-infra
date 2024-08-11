@@ -1,10 +1,10 @@
-- name: Setup Zookeper
-  hosts: zookeper
+- name: Setup Zookewper
+  hosts: zookeeper
   vars_files:
     - inventories/local/group_vars/vault.yml
     - inventories/local/group_vars/common.yml
   roles:
-    - zookeper
+    - zookeeper
 
 - name: Setup Kafka Broker
   hosts: kafka_brokers

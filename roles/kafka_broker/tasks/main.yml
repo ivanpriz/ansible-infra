@@ -4,14 +4,6 @@
     src: kafka-broker.service.j2
     dest: /etc/systemd/system/kafka-broker.service
 
-- name: Debug hostvars
-  debug:
-    var: hostvars
-
-- name: Debug vars
-  debug:
-    var: groups
-
 - name: Copy cofnig template
   become: true
   template:
