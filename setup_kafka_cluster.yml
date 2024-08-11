@@ -12,4 +12,4 @@
     - inventories/local/group_vars/vault.yml
     - inventories/local/group_vars/common.yml
   roles:
-    - kafka_broker
+    - kafka_broker_zoo

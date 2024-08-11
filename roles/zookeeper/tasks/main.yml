@@ -10,6 +10,13 @@
     src: zookeeper.properties.j2
     dest: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/zookeeper.properties"
 
+- name: Create myid file
+  become: true
+  copy:
+    dest: /var/lib/zookeeper/myid 
+    content: |
+      "{{ groups['kafka_controllers_raft'].index(inventory_hostname) }}"
+
 - name: Just force systemd to reread configs (2.4 and above)
   become: true
   ansible.builtin.service:
