@@ -20,7 +20,7 @@
   become: true
   ansible.builtin.copy:
     dest: /var/lib/zookeeper/myid 
-    content: "{{ groups['kafka_controllers_raft'].index(inventory_hostname) }}"
+    content: "{{ groups['zookeeper'].index(inventory_hostname) }}"
 
 - name: Just force systemd to reread configs (2.4 and above)
   become: true
