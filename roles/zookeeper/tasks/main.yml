@@ -10,7 +10,7 @@
     src: zookeeper.properties.j2
     dest: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/zookeeper.properties"
 
-- namw: Create myid file
+- name: Create myid file
   become: true
   ansible.builtin.file:
     path: /var/lib/zookeeper/myid
