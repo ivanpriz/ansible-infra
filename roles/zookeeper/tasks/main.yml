@@ -18,7 +18,7 @@
 
 - name: Insert id to myid file
   become: true
-  copy:
+  ansible.builtin.copy:
     dest: /var/lib/zookeeper/myid 
     content: "{{ groups['kafka_controllers_raft'].index(inventory_hostname) }}"
 
