@@ -2,7 +2,7 @@
   become: true
   template:
     src: zookeper.service.j2
-    dest: /etc/systemd/system/zookeper.service
+    dest: /etc/systemd/system/zookeeper.service
 
 - name: Place zookeper config
   become: true
@@ -15,9 +15,9 @@
   ansible.builtin.service:
     daemon_reload: true
 
-- name: "Restart Zookeper"
+- name: "Restart Zookeeper"
   become: true
   ansible.builtin.service:
-    name: zookeper
+    name: zookeeper
     enabled: true
     state: restarted
