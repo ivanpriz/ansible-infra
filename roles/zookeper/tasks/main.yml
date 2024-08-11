@@ -6,7 +6,7 @@
 
 - name: Debug
   debug:
-    var: groups[zookeper]
+    var: groups['zookeper']
 
 
 - name: Place zookeper config
