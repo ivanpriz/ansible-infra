@@ -3,8 +3,8 @@ dataDir=/var/lib/zookeeper/
 clientPort=2181
 initLimit=5
 syncLimit=2
-{ % for zoo_node in groups['zookeper'] % }
+{% for zoo_node in groups['zookeper'] %}
     server.{{ loop.index }}={{ zoo_node }}:2888:3888
-{ % endfor % }
+{% endfor %}
 autopurge.snapRetainCount=3
 autopurge.purgeInterval=24
