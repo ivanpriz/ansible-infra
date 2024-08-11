@@ -1,6 +1,6 @@
 broker.id=1
 listeners=PLAINTEXT://0.0.0.0:9092
-advertised.listeners=PLAINTEXT://{{ groups[zookeeper].0}}:9092
+advertised.listeners=PLAINTEXT://{{ groups['zookeeper'].0}}:9092
 log.dirs=/opt/kafka/data/kafka-logs
-zookeeper.connect={ % for zoo_node in groups[zookeeper] % }{{zoo_node}}:2181{ % endfor % }
+zookeeper.connect={ % for zoo_node in groups['zookeeper'] % }{{zoo_node}}:2181{ % endfor % }
 zookeeper.connection.timeout.ms=18000
