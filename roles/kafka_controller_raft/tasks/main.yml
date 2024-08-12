@@ -4,6 +4,12 @@
     src: server.properties.j2
     dest: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/kraft/server.properties"
 
+- name: Create unit file for controller
+  become: true
+  template:
+    src: kafka-controller-raft.service.j2
+    dest: /etc/systemd/system/kafka-controller-raft.service
+
 # TEMP
 - name: Delete log catalog if exists
   become: true
