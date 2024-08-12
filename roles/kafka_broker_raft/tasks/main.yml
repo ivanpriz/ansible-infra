@@ -1,4 +1,4 @@
-- name: Copy controller config template
+- name: Copy broker config template
   become: true
   template:
     src: server.properties.j2
