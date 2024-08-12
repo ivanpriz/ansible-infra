@@ -1,1 +1,2 @@
 kafka_cluster_id: 4WzyJ1WBTyG7Sf1XsSo_SQ 
+kraft_logs_dir: /opt/kafka/data/kraft-combined-logs

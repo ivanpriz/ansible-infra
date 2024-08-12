@@ -7,4 +7,4 @@ inter.broker.listener.name=PLAINTEXT
 advertised.listeners=PLAINTEXT://{{ hostvars[inventory_hostname]['ansible_host'] }}:9093
 controller.listener.names=CONTROLLER
 listener.security.protocol.map=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,JMX:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
-log.dirs=/opt/kafka/data/kraft-combined-logs
+log.dirs={{ kraft_logs_dir }}

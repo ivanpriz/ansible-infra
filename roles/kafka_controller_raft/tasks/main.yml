@@ -4,6 +4,13 @@
     src: server.properties.j2
     dest: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/kraft/server.properties"
 
+# TEMP
+- name: Delete log catalog if exists
+  become: true
+  ansible.builtin.file:
+    path: "{{ kraft_logs_dir }}"
+    state: absent
+
 - name: Create log catalog
   become: true
   shell: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/bin/kafka-storage.sh format -t {{ kafka_cluster_id }} -c {{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/kraft/server.properties"
