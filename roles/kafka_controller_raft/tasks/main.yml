@@ -1,9 +1,11 @@
 - name: Copy controller config template
+  become: true
   template:
     src: server.properties.j2
     dest: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/kraft/server.properties"
 
 - name: Create log catalog
+  become: true
   shell: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/bin/kafka-storage.sh format -t {{ kafka_cluster_id }} -c {{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/kraft/servcer.properties"
 
 - name: Force systemd to reread configs
