@@ -29,6 +29,6 @@
 - name: "Restart Broker"
   become: true
   ansible.builtin.service:
-    name: kafka-controller-raft
+    name: kafka-broker-raft
     enabled: true
     state: restarted
