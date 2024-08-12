@@ -1,0 +1,15 @@
+- name: Setup Controllers Raft
+  hosts: kafka_controllers_raft
+  vars_files:
+    - inventories/local/group_vars/vault.yml
+    - inventories/local/group_vars/common.yml
+  roles:
+    - kafka_controller_raft
+
+- name: Setup Kafka Brokers Raft
+  hosts: kafka_brokers_raft
+  vars_files:
+    - inventories/local/group_vars/vault.yml
+    - inventories/local/group_vars/common.yml
+  roles:
+    - kafka_broker_raft
