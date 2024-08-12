@@ -1,6 +1,6 @@
 process.roles=controller
 node.id={{ groups['kafka_controllers_raft'].index(inventory_hostname) - 1}}
-controller.quorum.voters={% for controller_node in groups['kafka_controllers_raft'] %}{{ loop.index }}@{{ hostvars[controller_node]['ansible_host'] }}:9093{% if not loop.last %},{% endif %}{% endfor %}
+controller.quorum.voters={% for controller_node in groups['kafka_controllers_raft'] %}{{ loop.index0 }}@{{ hostvars[controller_node]['ansible_host'] }}:9093{% if not loop.last %},{% endif %}{% endfor %}
 
 listeners=CONTROLLER://{{ hostvars[inventory_hostname]['ansible_host'] }}:9093
 controller.listener.names=CONTROLLER
