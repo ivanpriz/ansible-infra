@@ -78,4 +78,5 @@
 - name: Put client config in kafka dir
   become: true
   template:
-    path: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/kraft/client-sasl.properties"
+    src: client-sasl.properties.j2
+    dest: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/kraft/client-sasl.properties"
