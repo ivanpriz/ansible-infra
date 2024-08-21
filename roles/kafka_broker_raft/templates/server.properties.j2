@@ -2,9 +2,24 @@ process.roles=broker
 node.id={{ groups['kafka_controllers_raft'] | length + groups['kafka_brokers_raft'].index(inventory_hostname) }}
 controller.quorum.voters={% for controller_node in groups['kafka_controllers_raft'] %}{{ loop.index0 }}@{{ hostvars[controller_node]['ansible_host'] }}:9093{% if not loop.last %},{% endif %}{% endfor %}
 
-listeners=PLAINTEXT://{{ hostvars[inventory_hostname]['ansible_host'] }}:9092
-inter.broker.listener.name=PLAINTEXT
-advertised.listeners=PLAINTEXT://{{ hostvars[inventory_hostname]['ansible_host'] }}:9092
+listeners=BROKER://{{ hostvars[inventory_hostname]['ansible_host'] }}:9092
+inter.broker.listener.name=BROKER
+advertised.listeners=BROKER://{{ hostvars[inventory_hostname]['ansible_host'] }}:9092
 controller.listener.names=CONTROLLER
-listener.security.protocol.map=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,JMX:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+
+sasl.enabled.mechanisms=PLAIN
+sasl.mechanism.controller.protocol=PLAIN
+sasl.mechanism.inter.broker.protocol=PLAIN
+
+listener.name.broker.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
+    username="admin" \
+    password="$KAFKA_ADMIN_PASSWORD" \
+    user_admin="$KAFKA_ADMIN_PASSWORD";
+
+listener.name.controller.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
+    username="admin" \
+    password="admin" \
+    user_admin="admin";
+
+listener.security.protocol.map=CONTROLLER:SASL_PLAINTEXT,BROKER:SASL_PLAINTEXT,JMX:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
 log.dirs={{ kraft_logs_dir }}
