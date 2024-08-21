@@ -74,3 +74,9 @@
   ansible.builtin.file:
     path: "{{ kafka_download_path }}"
     state: absent
+
+- name: Put client config in kafka dir
+  become: true
+  template:
+    path: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/kraft/client-sasl.properties"
+    state: present
