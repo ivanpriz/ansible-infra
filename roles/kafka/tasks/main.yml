@@ -79,4 +79,3 @@
   become: true
   template:
     path: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/kraft/client-sasl.properties"
-    state: present
