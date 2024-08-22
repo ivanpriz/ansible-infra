@@ -21,3 +21,8 @@ listener.name.controller.plain.sasl.jaas.config=org.apache.kafka.common.security
     
 listener.security.protocol.map=CONTROLLER:SASL_PLAINTEXT,BROKER:SASL_PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
 log.dirs={{ kraft_logs_dir }}
+
+# ACL
+authorizer.class.name=org.apache.kafka.metadata.authorizer.StandardAuthorizer
+allow.everyone.if.no.acl.found=true
+super.users=User:{{ sasl_plain_broker_username }}
