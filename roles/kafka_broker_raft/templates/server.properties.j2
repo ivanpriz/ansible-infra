@@ -8,7 +8,7 @@ advertised.listeners=BROKER://{{ hostvars[inventory_hostname]['ansible_host'] }}
 controller.listener.names=CONTROLLER
 
 sasl.enabled.mechanisms=PLAIN
-sasl.mechanism.controller.protocol=SASL_PLAINTEXT
+sasl.mechanism.controller.protocol=PLAIN
 sasl.mechanism.inter.broker.protocol=PLAIN
 
 listener.name.broker.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
