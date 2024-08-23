@@ -6,8 +6,8 @@ After=network.target
 [Service]
 Type=simple
 ProtectHome=off
-ExecStart={{ kafka_unzip_path }}/kafka_2.12-3.4.0/bin/kafka-server-start.sh {{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/kraft/server.properties
-ExecStop={{ kafka_unzip_path }}/kafka_2.12-3.4.0/bin/kafka-server-stop.sh
+ExecStart={{ kafka_unzip_path }}/kafka_2.12-3.8.0/bin/kafka-server-start.sh {{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/server.properties
+ExecStop={{ kafka_unzip_path }}/kafka_2.12-3.8.0/bin/kafka-server-stop.sh
 Restart=on-abnormal
 
 [Install]
