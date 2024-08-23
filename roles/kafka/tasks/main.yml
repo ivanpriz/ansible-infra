@@ -36,17 +36,23 @@
   register:
     kafka_archive_dir
 
+- name: TEMP - remove kafka 3.4.0
+  become: true
+  ansible.builtin.file:
+    path: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0"
+    state: absent
+
 - name: Check if unarchived kafka exists
   become: true
   stat:
-    path: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0"
+    path: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0"
   register:
     kafka_dir
 
-- name: Download kafka3.4 tar
+- name: Download kafka3.8 tar
   become: true
   ansible.builtin.get_url:
-    url: https://archive.apache.org/dist/kafka/3.4.0/kafka_2.12-3.4.0.tgz 
+    url: https://archive.apache.org/dist/kafka/3.8.0/kafka_2.12-3.8.0.tgz 
     dest: "{{ kafka_download_path }}"
   when:
     - not kafka_archive_dir.stat.exists
@@ -79,4 +85,4 @@
   become: true
   template:
     src: client-sasl.properties.j2
-    dest: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0/config/kraft/client-sasl.properties"
+    dest: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/client-sasl.properties"
