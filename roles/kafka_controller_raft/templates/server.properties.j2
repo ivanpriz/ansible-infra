@@ -19,7 +19,7 @@ listener.name.controller.plain.sasl.jaas.config=org.apache.kafka.common.security
     password={{ sasl_plain_controller_password }} \
     user_admin={{ sasl_plain_controller_admin_username }};
     
-listener.security.protocol.map=CONTROLLER:SASL_PLAINTEXT,BROKER:SASL_PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
+listener.security.protocol.map=CONTROLLER:SASL_PLAINTEXT,BROKER:SASL_PLAINTEXT
 log.dirs={{ kraft_logs_dir }}
 
 # ACL
