@@ -1,14 +1,14 @@
 KafkaServer {
   org.apache.kafka.common.security.plain.PlainLoginModule required
-  username={{ sasl_plain_broker_username }} 
-  password={{ sasl_plain_broker_password }} 
-  user1={{ sasl_plain_user1_password }} 
-  user2={{ sasl_plain_user2_password }} 
-  user3={{ sasl_plain_user3_password }};
+  username="{{ sasl_plain_broker_username }}"
+  password="{{ sasl_plain_broker_password }}"
+  user1="{{ sasl_plain_user1_password }}"
+  user2="{{ sasl_plain_user2_password }}"
+  user3="{{ sasl_plain_user3_password }}";
 };
 
 KafkaClient {
   org.apache.kafka.common.security.plain.PlainLoginModule required
-  username={{ sasl_plain_broker_username }} 
-  password={{ sasl_plain_broker_password }};
+  username="{{ sasl_plain_broker_username }}"
+  password="{{ sasl_plain_broker_password }}";
 };
