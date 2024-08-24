@@ -1,5 +1,3 @@
 security.protocol=SASL_PLAINTEXT
 sasl.mechanism=PLAIN
-sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
-username={{ sasl_plain_broker_username }}\
-password={{ sasl_plain_broker_password }};
+sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username="{{ sasl_plain_broker_username }}" password="{{ sasl_plain_broker_password }}";
