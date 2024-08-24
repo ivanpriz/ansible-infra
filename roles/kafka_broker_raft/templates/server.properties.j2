@@ -11,20 +11,6 @@ sasl.enabled.mechanisms=PLAIN
 sasl.mechanism.controller.protocol=PLAIN
 sasl.mechanism.inter.broker.protocol=PLAIN
 
-listener.name.broker.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
-    username={{ sasl_plain_broker_username }} \
-    password={{ sasl_plain_broker_password }} \
-    user1={{ sasl_plain_user1_password }} \
-    user2={{ sasl_plain_user2_password }} \
-    user3={{ sasl_plain_user3_password }};
-
-listener.name.controller.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
-    username={{ sasl_plain_controller_username }} \
-    password={{ sasl_plain_controller_password }} \
-    user1={{ sasl_plain_user1_password }} \
-    user2={{ sasl_plain_user2_password }} \
-    user3={{ sasl_plain_user3_password }};
-
 listener.security.protocol.map=CONTROLLER:SASL_PLAINTEXT,BROKER:SASL_PLAINTEXT
 log.dirs={{ kraft_logs_dir }}
 
