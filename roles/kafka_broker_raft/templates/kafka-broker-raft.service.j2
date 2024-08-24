@@ -6,7 +6,9 @@ After=network.target
 [Service]
 Type=simple
 ProtectHome=off
-ExecStart=(KAFKA_OPTS="-Djava.security.auth.login.config={{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/jaas.conf" {{ kafka_unzip_path }}/kafka_2.12-3.8.0/bin/kafka-server-start.sh {{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/server.properties)
+Environment=KAFKA_OPTS="-Djava.security.auth.login.config={{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/jaas.conf"
+PassEnvironment=KAFKA_OPTS
+ExecStart={{ kafka_unzip_path }}/kafka_2.12-3.8.0/bin/kafka-server-start.sh {{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/server.properties
 ExecStop={{ kafka_unzip_path }}/kafka_2.12-3.8.0/bin/kafka-server-stop.sh
 Restart=on-abnormal
 
