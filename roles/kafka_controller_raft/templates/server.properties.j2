@@ -29,4 +29,4 @@ log.dirs={{ kraft_logs_dir }}
 # ACL
 authorizer.class.name=org.apache.kafka.metadata.authorizer.StandardAuthorizer
 allow.everyone.if.no.acl.found=true
-super.users=User:{{ sasl_plain_broker_username }},User:{{ sasl_plain_controller_username }}
+super.users=User:{{ sasl_plain_broker_username }};User:{{ sasl_plain_controller_username }}
