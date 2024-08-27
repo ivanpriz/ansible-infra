@@ -81,8 +81,17 @@
     path: "{{ kafka_download_path }}"
     state: absent
 
-- name: Put client config in kafka dir
+- name: Put client configs in kafka dir
   become: true
   template:
-    src: client-sasl.properties.j2
-    dest: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/client-sasl.properties"
+    src: "{{ item.filename }}"
+    dest: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/{{ item.dest }}"
+  loop:
+    - { "filename": "admin-sasl.properties.j2", "dest": "admin-sasl.properties.j2" }
+    - { "filename": "user1-sasl.properties.j2", "dest": "user1-sasl.properties.j2" }
+
+- name: TMP - remove client-sasl.properties
+  become: true
+  ansible.builtin.file:
+    path: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/client-sasl.properties"
+    state: absent
