@@ -87,11 +87,15 @@
     src: "{{ item.filename }}"
     dest: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/{{ item.dest }}"
   loop:
-    - { "filename": "admin-sasl.properties.j2", "dest": "admin-sasl.properties.j2" }
-    - { "filename": "user1-sasl.properties.j2", "dest": "user1-sasl.properties.j2" }
+    - { "filename": "admin-sasl.properties.j2", "dest": "admin-sasl.properties" }
+    - { "filename": "user1-sasl.properties.j2", "dest": "user1-sasl.properties" }
 
-- name: TMP - remove client-sasl.properties
+- name: TMP - remove old properties files
   become: true
   ansible.builtin.file:
-    path: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/client-sasl.properties"
+    path: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/{{ item.filename }}"
     state: absent
+  loop:
+    - { "filename": "client-sasl.properties" }
+    - { "filename": "user1-sasl.properties.j2" }
+    - { "filename": "admin-sasl.properties.j2" }
