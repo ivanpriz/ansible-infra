@@ -2,7 +2,6 @@ kafka_cluster_id: 4WzyJ1WBTyG7Sf1XsSo_SQ
 kraft_logs_dir: /opt/kafka/data/kraft-combined-logs
 sasl_plain_broker_username: "{{ vault_sasl_plain_broker_username }}"
 sasl_plain_broker_password: "{{ vault_sasl_plain_broker_password }}"
-sasl_plain_broker_admin_username: "{{ vault_sasl_plain_broker_admin_username }}"
 sasl_plain_controller_username: "{{ vault_sasl_plain_controller_username }}"
 sasl_plain_controller_password: "{{ vault_sasl_plain_controller_password }}"
-sasl_plain_controller_admin_username: "{{ vault_sasl_plain_controller_admin_username }}"
+sasl_plain_user1_password: "{{ vault_sasl_plain_user1_password }}"
