@@ -15,3 +15,12 @@
     - inventories/local/group_vars/common_raft.yml
   roles:
     - kafka_broker_raft
+
+- name: Setup test topic & acls
+  hosts: kafka_acl_manager
+  vars_files:
+    - inventories/local/group_vars/vault.yml
+    - inventories/local/group_vars/common.yml
+    - inventories/local/group_vars/common_raft.yml
+  roles:
+    - kafka_acl

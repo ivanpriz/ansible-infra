@@ -5,3 +5,4 @@ sasl_plain_broker_password: "{{ vault_sasl_plain_broker_password }}"
 sasl_plain_controller_username: "{{ vault_sasl_plain_controller_username }}"
 sasl_plain_controller_password: "{{ vault_sasl_plain_controller_password }}"
 sasl_plain_user1_password: "{{ vault_sasl_plain_user1_password }}"
+kafka_unzip_path: '/usr/bin/'

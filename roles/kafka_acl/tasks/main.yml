@@ -1,0 +1,12 @@
+- name: Create test topic
+  become: true
+  ansible.builtin.shell:     
+    cmd: bin/kafka-topics.sh --bootstrap-server localhost:9092 --command-config config/kraft/admin-sasl.properties --create --topic test-topic
+    chdir: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0"
+
+
+- name: Setup ACL for user1
+  become: true
+  ansible.builtin.shell: 
+    cmd: kafka-acls --bootstrap-server localhost:9092 --command-config config/kraft/admin-sasl.properties --add --allow-principal User:user1 --operation WRITE --topic test-topic
+    chdir: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0"

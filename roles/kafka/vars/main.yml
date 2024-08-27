@@ -1,3 +1,2 @@
-kafka_unzip_path: '/usr/bin/'
 kafka_download_path: '/tmp/kafka.tgz'
 kafka_user: 'kafka'
