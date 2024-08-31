@@ -15,12 +15,16 @@ listener.name.broker.plain.sasl.jaas.config=org.apache.kafka.common.security.pla
     username={{ sasl_plain_broker_username }} \
     password={{ sasl_plain_broker_password }} \
     user_{{ sasl_plain_broker_username }}={{ sasl_plain_broker_password }} \
+    user_user2={{ sasl_plain_user2_password }} \
+    user_user3={{ sasl_plain_user3_password }} \
     user_user1={{ sasl_plain_user1_password }};
 
 listener.name.controller.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
     username={{ sasl_plain_controller_username }} \
     password={{ sasl_plain_controller_password }} \
     user_{{ sasl_plain_broker_username }}={{ sasl_plain_broker_password }} \
+    user_user2={{ sasl_plain_user2_password }} \
+    user_user3={{ sasl_plain_user3_password }} \
     user_user1={{ sasl_plain_user1_password }};
 
 listener.security.protocol.map=CONTROLLER:SASL_PLAINTEXT,BROKER:SASL_PLAINTEXT

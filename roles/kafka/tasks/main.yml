@@ -89,6 +89,8 @@
   loop:
     - { "filename": "admin-sasl.properties.j2", "dest": "admin-sasl.properties" }
     - { "filename": "user1-sasl.properties.j2", "dest": "user1-sasl.properties" }
+    - { "filename": "user2-sasl.properties.j2", "dest": "user2-sasl.properties" }
+    - { "filename": "user3-sasl.properties.j2", "dest": "user3-sasl.properties" }
 
 - name: TMP - remove old properties files
   become: true
