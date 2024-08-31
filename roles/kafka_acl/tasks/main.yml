@@ -14,5 +14,5 @@
 - name: Setup ACL for user2 (READ for test-topic)
   become: true
   ansible.builtin.shell: 
-    cmd: bin/kafka-acls.sh --bootstrap-server 10.10.10.7:9092 --command-config config/kraft/admin-sasl.properties --add --allow-principal User:user1 --operation READ --topic test-topic
+    cmd: bin/kafka-acls.sh --bootstrap-server 10.10.10.7:9092 --command-config config/kraft/admin-sasl.properties --add --allow-principal User:user2 --operation READ --topic test-topic
     chdir: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0"
