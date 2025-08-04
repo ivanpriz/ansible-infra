@@ -1,0 +1,1 @@
+Create task for creating cluster id and myid for raft controllers

@@ -1,0 +1,34 @@
+process.roles=controller
+node.id={{ groups['kafka_controllers_raft'].index(inventory_hostname) }}
+controller.quorum.voters={% for controller_node in groups['kafka_controllers_raft'] %}{{ loop.index0 }}@{{ hostvars[controller_node]['ansible_host'] }}:9093{% if not loop.last %},{% endif %}{% endfor %}
+
+listeners=CONTROLLER://{{ hostvars[inventory_hostname]['ansible_host'] }}:9093
+controller.listener.names=CONTROLLER
+
+sasl.enabled.mechanisms=PLAIN
+sasl.mechanism.controller.protocol=PLAIN
+sasl.mechanism.inter.broker.protocol=PLAIN
+
+listener.name.broker.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
+    username={{ sasl_plain_broker_username }} \
+    password={{ sasl_plain_broker_password }} \
+    user_{{ sasl_plain_broker_username }}={{ sasl_plain_broker_password }} \
+    user_user2={{ sasl_plain_user2_password }} \
+    user_user3={{ sasl_plain_user3_password }} \
+    user_user1={{ sasl_plain_user1_password }};
+
+listener.name.controller.plain.sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
+    username={{ sasl_plain_controller_username }} \
+    password={{ sasl_plain_controller_password }} \
+    user_{{ sasl_plain_broker_username }}={{ sasl_plain_broker_password }} \
+    user_user2={{ sasl_plain_user2_password }} \
+    user_user3={{ sasl_plain_user3_password }} \
+    user_user1={{ sasl_plain_user1_password }};
+    
+listener.security.protocol.map=CONTROLLER:SASL_PLAINTEXT,BROKER:SASL_PLAINTEXT
+log.dirs={{ kraft_logs_dir }}
+
+# ACL
+authorizer.class.name=org.apache.kafka.metadata.authorizer.StandardAuthorizer
+allow.everyone.if.no.acl.found=true
+super.users=User:{{ sasl_plain_broker_username }}

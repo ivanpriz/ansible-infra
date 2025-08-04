@@ -1,0 +1,2 @@
+kafka_download_path: '/tmp/kafka.tgz'
+kafka_user: 'kafka'

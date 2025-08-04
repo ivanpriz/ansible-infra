@@ -1,0 +1,103 @@
+- name: Create kafka user
+  become: true
+  ansible.builtin.user:
+    name: "{{ kafka_user }}"
+    groups: sudo
+    append: true
+
+- name: Make kafka user sudo without pwd
+  become: true
+  copy:
+    dest: /etc/sudoers.d/80-ansible-sudo-user
+    content: "{{ kafka_user }} ALL=(ALL) NOPASSWD:ALL"
+    mode: 0440
+
+- name: Update apt
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+- name: Add open JDK repo
+  become: true
+  apt_repository:
+    repo: ppa:openjdk-r/ppa
+
+- name: Install java
+  become: true
+  apt:
+    name: "openjdk-11-jdk"
+    update_cache: yes
+
+- name: Check if kafka archive exists
+  become: true
+  stat:
+    path: "{{ kafka_download_path }}"
+  register:
+    kafka_archive_dir
+
+- name: TEMP - remove kafka 3.4.0
+  become: true
+  ansible.builtin.file:
+    path: "{{ kafka_unzip_path }}/kafka_2.12-3.4.0"
+    state: absent
+
+- name: Check if unarchived kafka exists
+  become: true
+  stat:
+    path: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0"
+  register:
+    kafka_dir
+
+- name: Download kafka3.8 tar
+  become: true
+  ansible.builtin.get_url:
+    url: https://archive.apache.org/dist/kafka/3.8.0/kafka_2.12-3.8.0.tgz 
+    dest: "{{ kafka_download_path }}"
+  when:
+    - not kafka_archive_dir.stat.exists
+    - not kafka_dir.stat.exists
+
+- name: Check if kafka archive exists again
+  become: true
+  stat:
+    path: "{{ kafka_download_path }}"
+  register:
+    kafka_archive_dir
+
+- name: Unarchive kafka
+  become: true
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: "{{ kafka_download_path }}"
+    dest: "{{ kafka_unzip_path }}"
+  when:
+    - not kafka_dir.stat.exists
+    - kafka_archive_dir.stat.exists
+    
+- name: Remove archive
+  become: true
+  ansible.builtin.file:
+    path: "{{ kafka_download_path }}"
+    state: absent
+
+- name: Put client configs in kafka dir
+  become: true
+  template:
+    src: "{{ item.filename }}"
+    dest: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/{{ item.dest }}"
+  loop:
+    - { "filename": "admin-sasl.properties.j2", "dest": "admin-sasl.properties" }
+    - { "filename": "user1-sasl.properties.j2", "dest": "user1-sasl.properties" }
+    - { "filename": "user2-sasl.properties.j2", "dest": "user2-sasl.properties" }
+    - { "filename": "user3-sasl.properties.j2", "dest": "user3-sasl.properties" }
+
+- name: TMP - remove old properties files
+  become: true
+  ansible.builtin.file:
+    path: "{{ kafka_unzip_path }}/kafka_2.12-3.8.0/config/kraft/{{ item.filename }}"
+    state: absent
+  loop:
+    - { "filename": "client-sasl.properties" }
+    - { "filename": "user1-sasl.properties.j2" }
+    - { "filename": "admin-sasl.properties.j2" }
